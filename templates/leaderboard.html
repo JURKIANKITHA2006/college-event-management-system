@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Student Leaderboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f3fb, #eee7f6);
+    color: #333;
+}
+
+header {
+    background: linear-gradient(135deg, #6a1b9a, #8e44ad);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+.container {
+    width: 92%;
+    max-width: 900px;
+    margin: 35px auto;
+}
+
+.top-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(106,27,154,0.15);
+    margin-bottom: 25px;
+}
+
+.top-card h2 {
+    color: #6a1b9a;
+    margin: 0 0 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(106,27,154,0.12);
+}
+
+th {
+    background: #6a1b9a;
+    color: white;
+    padding: 17px;
+    text-align: center;
+}
+
+td {
+    padding: 16px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+
+tr:hover {
+    background: #faf5ff;
+}
+
+.rank {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.points {
+    font-weight: bold;
+    color: #8e44ad;
+}
+
+.back {
+    display: inline-block;
+    margin-top: 25px;
+    text-decoration: none;
+    color: #6a1b9a;
+    font-weight: bold;
+}
+
+.empty {
+    background: white;
+    padding: 35px;
+    text-align: center;
+    border-radius: 18px;
+    color: #777;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 25px;
+    }
+
+    th, td {
+        padding: 12px 6px;
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>🥇 Student Leaderboard</h1>
+    <p>Top students based on participation points</p>
+</header>
+
+<div class="container">
+
+    <div class="top-card">
+        <h2>🏆 Top Participants</h2>
+        <p>Keep participating in events and climb the leaderboard!</p>
+    </div>
+
+    {% if leaderboard %}
+
+    <table>
+
+        <tr>
+            <th>Rank</th>
+            <th>Student Name</th>
+            <th>Registration No.</th>
+            <th>Points</th>
+        </tr>
+
+        {% for student in leaderboard %}
+
+        <tr>
+            <td class="rank">
+                {% if loop.index == 1 %}
+                    🥇
+                {% elif loop.index == 2 %}
+                    🥈
+                {% elif loop.index == 3 %}
+                    🥉
+                {% else %}
+                    {{ loop.index }}
+                {% endif %}
+            </td>
+
+            <td>{{ student['name'] }}</td>
+
+            <td>{{ student['registration_no'] }}</td>
+
+            <td class="points">
+                {{ student['total_points'] }} ⭐
+            </td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+    {% else %}
+
+    <div class="empty">
+        <h3>No participation data yet</h3>
+        <p>Students will appear here after participating in events.</p>
+    </div>
+
+    {% endif %}
+
+    <a href="/dashboard" class="back">← Back to Dashboard</a>
+
+</div>
+
+</body>
+</html>

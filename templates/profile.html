@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px 20px;
+        }
+
+        .header {
+            max-width: 900px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .profile-box {
+            max-width: 650px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            text-align: center;
+        }
+
+        .profile-icon {
+            font-size: 65px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            text-align: left;
+            background: #f5f6ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+
+        .info p {
+            padding: 12px 0;
+            border-bottom: 1px solid #ddd;
+            color: #444;
+        }
+
+        .info p:last-child {
+            border-bottom: none;
+        }
+
+        .label {
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .events {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        .event {
+            background: #f5f6ff;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        .event h3 {
+            color: #667eea;
+            margin-bottom: 8px;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            background: #667eea;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 9px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background: #5568d9;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 25px;
+            font-size: 13px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="logo">
+            🎓 College Event Management
+        </div>
+
+        <a href="{{ url_for('dashboard') }}" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="profile-box">
+
+        <div class="profile-icon">
+            👨‍🎓
+        </div>
+
+        <h1>
+            My Profile
+        </h1>
+
+        <div class="subtitle">
+            Dr.MGR Educational And Research Institute
+        </div>
+
+
+        {% if student %}
+
+
+        <div class="info">
+
+            <p>
+                <span class="label">
+                    Registration Number:
+                </span>
+
+                {{ student['registration_no'] }}
+            </p>
+
+
+            <p>
+                <span class="label">
+                    Name:
+                </span>
+
+                {{ student['name'] }}
+            </p>
+
+
+            <p>
+                <span class="label">
+                    Email:
+                </span>
+
+                {{ student['email'] }}
+            </p>
+
+
+            <p>
+                <span class="label">
+                    Department:
+                </span>
+
+                {{ student['department'] }}
+            </p>
+
+
+            <p>
+                <span class="label">
+                    Registered Events:
+                </span>
+
+                {{ registrations|length }}
+            </p>
+
+        </div>
+
+
+        <!-- EDIT PROFILE BUTTON -->
+
+        <a
+            href="{{ url_for('edit_profile') }}"
+            class="button"
+        >
+            ✏️ Edit Profile
+        </a>
+
+
+        <div class="events">
+
+            <h2>
+                My Registered Events
+            </h2>
+
+
+            {% if registrations %}
+
+
+                {% for event in registrations %}
+
+                    <div class="event">
+
+                        <h3>
+                            {{ event['name'] }}
+                        </h3>
+
+
+                        {% if event['date'] %}
+
+                            <p>
+                                <strong>
+                                    Event Date:
+                                </strong>
+
+                                {{ event['date'] }}
+                            </p>
+
+                        {% endif %}
+
+
+                        {% if event['deadline'] %}
+
+                            <p>
+                                <strong>
+                                    Registration Deadline:
+                                </strong>
+
+                                {{ event['deadline'] }}
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                {% endfor %}
+
+
+            {% else %}
+
+                <p style="margin-top:15px;">
+                    You have not registered for any events yet.
+                </p>
+
+            {% endif %}
+
+        </div>
+
+
+        {% else %}
+
+
+            <div class="info">
+
+                <p>
+                    Please login to view your profile.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('login') }}"
+                class="button"
+            >
+                Login
+            </a>
+
+
+        {% endif %}
+
+
+    </div>
+
+
+    <div class="footer">
+
+        © 2026 Dr.MGR Educational And Research Institute
+
+    </div>
+
+</body>
+
+</html>

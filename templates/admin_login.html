@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login | College Event Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+
+            background:
+                radial-gradient(circle at 20% 20%, #2563eb, transparent 35%),
+                radial-gradient(circle at 80% 80%, #1d4ed8, transparent 35%),
+                linear-gradient(135deg, #020617, #0f3c91, #0284c7);
+
+            color: white;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 1150px;
+            min-height: 650px;
+
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.20);
+            border-radius: 25px;
+
+            overflow: hidden;
+
+            backdrop-filter: blur(15px);
+
+            box-shadow:
+                0 30px 80px rgba(0, 0, 0, 0.35);
+        }
+
+        /* LEFT SIDE */
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            padding: 55px;
+        }
+
+        .admin-icon {
+            width: 105px;
+            height: 105px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: white;
+            border-radius: 50%;
+
+            font-size: 50px;
+
+            margin-bottom: 35px;
+
+            box-shadow:
+                0 15px 35px rgba(0, 0, 0, 0.25);
+        }
+
+        .college-name {
+            font-size: 48px;
+            font-weight: 900;
+
+            line-height: 1.15;
+
+            margin-bottom: 8px;
+
+            letter-spacing: 0.5px;
+        }
+
+        .college-name .highlight {
+            color: #ffb300;
+        }
+
+        .university {
+            font-size: 24px;
+            font-weight: bold;
+
+            letter-spacing: 8px;
+
+            margin-bottom: 45px;
+        }
+
+        .welcome-text {
+            max-width: 800px;
+
+            font-size: 19px;
+            line-height: 1.8;
+
+            color: #f1f5f9;
+        }
+
+        .admin-label {
+            margin-top: 35px;
+
+            padding: 12px 25px;
+
+            border-radius: 30px;
+
+            background: rgba(255, 255, 255, 0.15);
+
+            border: 1px solid rgba(255, 255, 255, 0.25);
+
+            font-size: 15px;
+            font-weight: bold;
+
+            letter-spacing: 1px;
+        }
+
+        /* RIGHT SIDE */
+
+        .right-section {
+            background: rgba(255, 255, 255, 0.97);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+
+            color: #222;
+        }
+
+        .login-box h2 {
+            font-size: 34px;
+
+            text-align: center;
+
+            margin-bottom: 10px;
+
+            color: #172554;
+        }
+
+        .login-box .subtitle {
+            text-align: center;
+
+            color: #64748b;
+
+            font-size: 14px;
+
+            margin-bottom: 35px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+
+            font-size: 14px;
+            font-weight: bold;
+
+            color: #334155;
+
+            margin-bottom: 8px;
+        }
+
+        .input-container {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+
+            padding: 15px 15px 15px 47px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 10px;
+
+            font-size: 15px;
+
+            outline: none;
+
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37, 99, 235, 0.12);
+        }
+
+        input::placeholder {
+            color: #94a3b8;
+        }
+
+        .login-button {
+            width: 100%;
+
+            padding: 16px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #1d4ed8,
+                    #0284c7
+                );
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .login-button:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37, 99, 235, 0.30);
+        }
+
+        .security {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+        .back-link {
+            text-align: center;
+
+            margin-top: 22px;
+        }
+
+        .back-link a {
+            text-decoration: none;
+
+            color: #2563eb;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* TABLET */
+
+        @media (max-width: 900px) {
+
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+
+            .left-section {
+                padding: 50px 30px;
+            }
+
+            .college-name {
+                font-size: 40px;
+            }
+
+            .right-section {
+                padding: 45px 30px;
+            }
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .left-section {
+                padding: 40px 20px;
+            }
+
+            .admin-icon {
+                width: 85px;
+                height: 85px;
+                font-size: 40px;
+            }
+
+            .college-name {
+                font-size: 30px;
+            }
+
+            .university {
+                font-size: 18px;
+                letter-spacing: 5px;
+                margin-bottom: 30px;
+            }
+
+            .welcome-text {
+                font-size: 15px;
+            }
+
+            .right-section {
+                padding: 35px 20px;
+            }
+
+            .login-box h2 {
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="main-container">
+
+        <!-- LEFT SECTION -->
+
+        <div class="left-section">
+
+            <div class="admin-icon">
+                🎓
+            </div>
+
+            <div class="college-name">
+
+                <span class="highlight">Dr.MGR</span>
+                Educational
+
+                <br>
+
+                and Research Institute
+
+            </div>
+
+            <div class="university">
+                UNIVERSITY
+            </div>
+
+            <div class="welcome-text">
+
+                Welcome to the
+                <strong>College Event Management System</strong>.
+
+                Manage college events, student registrations,
+                participation activities, event memories and
+                other administrative operations through the
+                secure administrator portal.
+
+            </div>
+
+            <div class="admin-label">
+                🔐 ADMINISTRATOR PORTAL
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SECTION -->
+
+        <div class="right-section">
+
+            <div class="login-box">
+
+                <h2>
+                    Admin Login
+                </h2>
+
+                <div class="subtitle">
+                    Sign in to access the administrator dashboard
+                </div>
+
+
+                <form method="POST">
+
+                    <!-- USERNAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Username
+                        </label>
+
+                        <div class="input-container">
+
+                            <span class="input-icon">
+                                👤
+                            </span>
+
+                            <input
+                                type="text"
+                                name="username"
+                                placeholder="Enter admin username"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Password
+                        </label>
+
+                        <div class="input-container">
+
+                            <span class="input-icon">
+                                🔑
+                            </span>
+
+                            <input
+                                type="password"
+                                name="password"
+                                placeholder="Enter admin password"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- LOGIN BUTTON -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        🔓 Login to Admin Dashboard
+                    </button>
+
+                </form>
+
+
+                <div class="security">
+                    🛡️ Secure administrator access
+                </div>
+
+
+                <div class="back-link">
+
+                    <a href="/login">
+                        ← Back to Student Login
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

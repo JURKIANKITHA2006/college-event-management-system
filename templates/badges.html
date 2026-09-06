@@ -1,0 +1,351 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Digital Badges</title><style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f3fb, #eee7f6);
+    color: #333;
+}
+
+
+/* ================= HEADER ================= */
+
+header {
+    background: linear-gradient(135deg, #6a1b9a, #8e44ad);
+    color: white;
+    text-align: center;
+    padding: 42px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 34px;
+}
+
+header p {
+    margin-top: 10px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+
+/* ================= CONTAINER ================= */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+
+/* ================= POINTS CARD ================= */
+
+.points-card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(106,27,154,0.15);
+    margin-bottom: 35px;
+}
+
+.points-icon {
+    font-size: 55px;
+}
+
+.points-card h2 {
+    color: #6a1b9a;
+    margin: 10px 0;
+}
+
+.points {
+    font-size: 52px;
+    font-weight: bold;
+    color: #8e44ad;
+}
+
+.points-card p {
+    color: #777;
+    margin-top: 10px;
+}
+
+
+/* ================= BADGE SECTION ================= */
+
+.section-title {
+    text-align: center;
+    color: #6a1b9a;
+    margin-bottom: 25px;
+}
+
+
+/* ================= BADGE GRID ================= */
+
+.badge-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 22px;
+}
+
+
+/* ================= BADGE CARD ================= */
+
+.badge-card {
+    background: white;
+    border-radius: 24px;
+    padding: 28px 18px;
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(106,27,154,0.12);
+
+    transition: transform 0.3s,
+                box-shadow 0.3s;
+}
+
+.badge-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(106,27,154,0.22);
+}
+
+
+/* ================= BADGE IMAGE ================= */
+
+.badge-image {
+
+    width: 135px;
+    height: 135px;
+
+    margin: 0 auto 20px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 68px;
+
+    background: linear-gradient(
+        135deg,
+        #f3e5f5,
+        #ffffff
+    );
+
+    border: 7px solid #eadcf1;
+
+    box-shadow:
+        0 8px 20px rgba(106,27,154,0.20),
+        inset 0 0 15px rgba(106,27,154,0.08);
+}
+
+
+/* ================= BADGE TITLE ================= */
+
+.badge-card h2 {
+    color: #6a1b9a;
+    font-size: 20px;
+    margin: 12px 0;
+}
+
+.badge-card p {
+    color: #777;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* ================= EARNED LABEL ================= */
+
+.earned {
+
+    display: inline-block;
+
+    margin-top: 12px;
+
+    padding: 8px 16px;
+
+    border-radius: 25px;
+
+    background: #f3e5f5;
+
+    color: #6a1b9a;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+/* ================= EMPTY ================= */
+
+.empty {
+
+    background: white;
+
+    padding: 50px 25px;
+
+    border-radius: 24px;
+
+    text-align: center;
+
+    box-shadow: 0 8px 25px rgba(106,27,154,0.12);
+}
+
+.empty-icon {
+    font-size: 70px;
+}
+
+.empty h2 {
+    color: #6a1b9a;
+}
+
+.empty p {
+    color: #777;
+}
+
+
+/* ================= BACK BUTTON ================= */
+
+.back {
+
+    display: inline-block;
+
+    margin-top: 30px;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: #6a1b9a;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+    transition: background 0.3s;
+}
+
+.back:hover {
+    background: #8e44ad;
+}
+
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+
+    .badge-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .badge-grid {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 27px;
+    }
+
+    .points {
+        font-size: 42px;
+    }
+
+}
+
+</style></head><body><!-- ================= HEADER ================= --><header><h1>🏅 Digital Badges</h1>
+
+<p>
+    Your achievements and participation milestones
+</p>
+
+</header><div class="container"><!-- ================= POINTS ================= --><div class="points-card"><div class="points-icon">
+    🏆
+</div>
+
+<h2>
+    Your Achievement Points
+</h2>
+
+<div class="points">
+    {{ total_points }}
+</div>
+
+<p>
+    Keep participating in college events to unlock more badges! 🌟
+</p>
+
+</div><!-- ================= BADGES ================= --><h2 class="section-title">
+    🏅 Your Earned Badges
+</h2>{% if badges %}
+
+<div class="badge-grid">{% for badge in badges %}
+
+<div class="badge-card"><!-- BADGE VISUAL -->
+
+<div class="badge-image">
+
+    {{ badge['icon'] }}
+
+</div>
+
+
+<!-- BADGE NAME -->
+
+<h2>
+
+    {{ badge['name'] }}
+
+</h2>
+
+
+<!-- DESCRIPTION -->
+
+<p>
+
+    {{ badge['description'] }}
+
+</p>
+
+
+<!-- EARNED -->
+
+<div class="earned">
+
+    ✓ Badge Earned
+
+</div>
+
+</div>{% endfor %}
+
+</div>{% else %}
+
+<!-- ================= NO BADGES ================= --><div class="empty"><div class="empty-icon">
+    🏅
+</div>
+
+<h2>
+    No Badges Yet
+</h2>
+
+<p>
+    Register for college events and earn participation points
+    to unlock your first digital badge!
+</p>
+
+</div>{% endif %}
+
+<!-- ================= BACK ================= --><a href="/dashboard" class="back">← Back to Dashboard
+
+</a></div></body></html>

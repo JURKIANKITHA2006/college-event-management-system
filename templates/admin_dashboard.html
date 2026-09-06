@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Dashboard</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+}
+
+/* HEADER */
+.header {
+    background: white;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+}
+
+.logo {
+    color: #667eea;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logout {
+    text-decoration: none;
+    background: #ff4d6d;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.logout:hover {
+    background: #e63e5d;
+}
+
+/* MAIN CONTAINER */
+.container {
+    max-width: 1150px;
+    margin: auto;
+    padding: 45px 20px;
+}
+
+/* WELCOME */
+.welcome {
+    text-align: center;
+    color: white;
+    margin-bottom: 35px;
+}
+
+.welcome h1 {
+    font-size: 34px;
+    margin-bottom: 10px;
+}
+
+.welcome p {
+    font-size: 16px;
+}
+
+/* STATISTICS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-bottom: 35px;
+}
+
+.stat-card {
+    background: white;
+    padding: 28px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.stat-icon {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.stat-card h2 {
+    font-size: 32px;
+    color: #667eea;
+    margin-bottom: 6px;
+}
+
+.stat-card p {
+    color: #555;
+    font-weight: bold;
+}
+
+/* ADMIN FEATURES */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.20);
+}
+
+.card .icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.card h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #666;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.card a {
+    display: inline-block;
+    text-decoration: none;
+    background: #667eea;
+    color: white;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.card a:hover {
+    background: #5568d9;
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    color: white;
+    padding: 25px;
+    font-size: 13px;
+}
+
+/* MOBILE */
+@media (max-width: 700px) {
+
+    .stats,
+    .cards {
+        grid-template-columns: 1fr;
+    }
+
+    .header {
+        padding: 18px 20px;
+    }
+
+    .welcome h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+
+    <div class="logo">
+        🔐 College Event Management
+    </div>
+
+    <a href="/admin/logout" class="logout">
+        Logout
+    </a>
+
+</div>
+
+
+<!-- MAIN -->
+<div class="container">
+
+    <!-- WELCOME -->
+    <div class="welcome">
+
+        <h1>👋 Welcome, Admin</h1>
+
+        <p>
+            Dr.MGR Educational And Research Institute
+        </p>
+
+    </div>
+
+
+    <!-- STATISTICS -->
+    <div class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📅</div>
+
+            <h2>{{ total_events }}</h2>
+
+            <p>Total Events</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">👨‍🎓</div>
+
+            <h2>{{ total_students }}</h2>
+
+            <p>Total Students</p>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📝</div>
+
+            <h2>{{ total_registrations }}</h2>
+
+            <p>Total Registrations</p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ADMIN FEATURES -->
+    <div class="cards">
+
+        <!-- ADD EVENT -->
+        <div class="card">
+
+            <div class="icon">➕</div>
+
+            <h2>Add Event</h2>
+
+            <p>
+                Create and publish a new college event.
+            </p>
+
+            <a href="/admin/add-event">
+                Add Event
+            </a>
+
+        </div>
+
+
+        <!-- MANAGE EVENTS -->
+        <div class="card">
+
+            <div class="icon">📅</div>
+
+            <h2>Manage Events</h2>
+
+            <p>
+                View, edit and delete college events.
+            </p>
+
+            <a href="/admin/events">
+                Manage Events
+            </a>
+
+        </div>
+
+
+        <!-- REGISTRATIONS -->
+        <div class="card">
+
+            <div class="icon">👥</div>
+
+            <h2>Registrations</h2>
+
+            <p>
+                View students registered for each event.
+            </p>
+
+            <a href="/registrations">
+                View Registrations
+            </a>
+
+        </div>
+
+
+        <!-- EVENT MEMORIES -->
+        <div class="card">
+
+            <div class="icon">📸</div>
+
+            <h2>Event Memories</h2>
+
+            <p>
+                Upload and manage photos and videos
+                from college events.
+            </p>
+
+            <a href="/admin/memories">
+                Manage Memories
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<div class="footer">
+
+    © 2026 Dr.MGR Educational And Research Institute
+
+</div>
+
+</body>
+</html>

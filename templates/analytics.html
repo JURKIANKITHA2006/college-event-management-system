@@ -1,0 +1,404 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Advanced Analytics</title><!-- Chart.js --><script src="https://cdn.jsdelivr.net/npm/chart.js"></script><style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f3fb, #eee7f6);
+    color: #333;
+}
+
+/* HEADER */
+
+header {
+    background: linear-gradient(135deg, #6a1b9a, #8e44ad);
+    color: white;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+header p {
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+/* CONTAINER */
+
+.container {
+    width: 92%;
+    max-width: 1100px;
+    margin: 35px auto;
+}
+
+/* SUMMARY CARDS */
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    padding: 25px 15px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(106,27,154,0.12);
+}
+
+.icon {
+    font-size: 38px;
+}
+
+.card h2 {
+    color: #6a1b9a;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+.number {
+    font-size: 35px;
+    font-weight: bold;
+    color: #8e44ad;
+}
+
+/* CHART SECTION */
+
+.chart-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 25px;
+}
+
+.chart-card {
+    background: white;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(106,27,154,0.12);
+}
+
+.chart-card h2 {
+    text-align: center;
+    color: #6a1b9a;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.chart-container {
+    position: relative;
+    height: 380px;
+}
+
+.doughnut-container {
+    position: relative;
+    height: 380px;
+}
+
+/* BACK BUTTON */
+
+.back {
+    display: inline-block;
+    margin-top: 30px;
+    text-decoration: none;
+    color: #6a1b9a;
+    font-weight: bold;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .chart-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    header h1 {
+        font-size: 26px;
+    }
+
+    .chart-container,
+    .doughnut-container {
+        height: 300px;
+    }
+}
+</style></head><body><header><h1>📊 Advanced Analytics</h1>
+
+<p>
+    College Event Management Overview
+</p>
+
+</header><div class="container"><!-- ================= SUMMARY ================= -->
+
+<div class="grid">
+
+    <div class="card">
+
+        <div class="icon">👨‍🎓</div>
+
+        <h2>Total Students</h2>
+
+        <div class="number">
+            {{ total_students }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">🎉</div>
+
+        <h2>Total Events</h2>
+
+        <div class="number">
+            {{ total_events }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">📝</div>
+
+        <h2>Total Registrations</h2>
+
+        <div class="number">
+            {{ total_registrations }}
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="icon">🏆</div>
+
+        <h2>Total Points</h2>
+
+        <div class="number">
+            {{ total_points }}
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- ================= GRAPHS ================= -->
+
+<div class="chart-grid">
+
+
+    <!-- BAR GRAPH -->
+
+    <div class="chart-card">
+
+        <h2>📈 Event Registrations</h2>
+
+        <div class="chart-container">
+
+            <canvas id="registrationChart"></canvas>
+
+        </div>
+
+    </div>
+
+
+    <!-- DOUGHNUT GRAPH -->
+
+    <div class="chart-card">
+
+        <h2>🍩 Registration Distribution</h2>
+
+        <div class="doughnut-container">
+
+            <canvas id="registrationPie"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- BACK -->
+
+<a href="/dashboard" class="back">
+    ← Back to Dashboard
+</a>
+
+</div><script>
+
+/* ================= EVENT DATA ================= */
+
+const eventNames = [
+
+{% for event in event_data %}
+    {{ event['name']|tojson }},
+{% endfor %}
+
+];
+
+
+const registrationCounts = [
+
+{% for event in event_data %}
+    {{ event['registrations'] }},
+{% endfor %}
+
+];
+
+
+/* ================= BAR CHART ================= */
+
+const barCanvas =
+    document.getElementById("registrationChart");
+
+new Chart(barCanvas, {
+
+    type: "bar",
+
+    data: {
+
+        labels: eventNames,
+
+        datasets: [{
+
+            label: "Registrations",
+
+            data: registrationCounts,
+
+            backgroundColor: "#8e44ad",
+
+            borderColor: "#6a1b9a",
+
+            borderWidth: 1,
+
+            borderRadius: 8
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    stepSize: 1
+
+                }
+
+            }
+
+        },
+
+        plugins: {
+
+            legend: {
+
+                display: true
+
+            }
+
+        }
+
+    }
+
+});
+
+
+/* ================= DOUGHNUT CHART ================= */
+
+const pieCanvas =
+    document.getElementById("registrationPie");
+
+new Chart(pieCanvas, {
+
+    type: "doughnut",
+
+    data: {
+
+        labels: eventNames,
+
+        datasets: [{
+
+            label: "Registrations",
+
+            data: registrationCounts,
+
+            backgroundColor: [
+
+                "#6a1b9a",
+                "#8e44ad",
+                "#9b59b6",
+                "#af7ac5",
+                "#bb8fce",
+                "#c39bd3",
+                "#d2b4de",
+                "#7d3c98",
+                "#884ea0",
+                "#a569bd"
+
+            ],
+
+            borderWidth: 2
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+
+                position: "bottom"
+
+            }
+
+        }
+
+    }
+
+});
+
+</script></body>
+</html>

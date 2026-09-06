@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Certificate of Participation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Georgia, "Times New Roman", serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f2f2f2;
+            padding: 30px;
+        }
+
+        .certificate {
+            max-width: 950px;
+            min-height: 650px;
+            margin: auto;
+            background: white;
+            border: 12px solid #667eea;
+            outline: 3px solid #764ba2;
+            padding: 45px 55px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .college {
+            font-family: Arial, sans-serif;
+            color: #667eea;
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-family: Arial, sans-serif;
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 25px;
+        }
+
+        .title {
+            font-size: 38px;
+            color: #333;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .participation {
+            font-family: Arial, sans-serif;
+            color: #667eea;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .text {
+            font-family: Arial, sans-serif;
+            color: #444;
+            font-size: 17px;
+            line-height: 1.8;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .student-name {
+            font-size: 32px;
+            color: #764ba2;
+            font-weight: bold;
+            margin: 18px 0;
+            text-transform: uppercase;
+        }
+
+        .event-name {
+            color: #333;
+            font-weight: bold;
+        }
+
+        .registration {
+            font-family: Arial, sans-serif;
+            margin-top: 18px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 55px;
+            font-family: Arial, sans-serif;
+        }
+
+        .signature {
+            width: 200px;
+            text-align: center;
+        }
+
+        .signature-line {
+            border-top: 1px solid #333;
+            margin-bottom: 8px;
+        }
+
+        .signature-name {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .signature-role {
+            color: #666;
+            font-size: 13px;
+            margin-top: 4px;
+        }
+
+        .demo-note {
+            font-size: 10px;
+            color: #999;
+            margin-top: 25px;
+            font-family: Arial, sans-serif;
+        }
+
+        .back {
+            display: block;
+            width: 200px;
+            margin: 25px auto 0;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+        }
+
+        @media (max-width: 650px) {
+            .certificate {
+                padding: 30px 20px;
+            }
+
+            .title {
+                font-size: 28px;
+            }
+
+            .student-name {
+                font-size: 24px;
+            }
+
+            .signatures {
+                flex-direction: column;
+                align-items: center;
+                gap: 35px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="certificate">
+
+    <div class="college">
+        Dr.MGR Educational And Research Institute
+    </div>
+
+    <div class="subtitle">
+        College Event Management System
+    </div>
+
+    <h1 class="title">
+        CERTIFICATE
+    </h1>
+
+    <div class="participation">
+        OF PARTICIPATION
+    </div>
+
+    <div class="text">
+
+        This is to certify that
+
+        <div class="student-name">
+            {{ student.registration_no }}
+        </div>
+
+        has actively participated in the event
+
+        <div class="student-name event-name">
+            {{ event.name }}
+        </div>
+
+        held at Dr.MGR Educational And Research Institute.
+
+    </div>
+
+    <div class="registration">
+        Registration Number: {{ student.registration_no }}
+    </div>
+
+
+    <div class="signatures">
+
+        <div class="signature">
+
+            <div class="signature-line"></div>
+
+            <div class="signature-name">
+                Dr. Anitha
+            </div>
+
+            <div class="signature-role">
+                HOD / Faculty Coordinator
+            </div>
+
+        </div>
+
+
+        <div class="signature">
+
+            <div class="signature-line"></div>
+
+            <div class="signature-name">
+                Dr. Kumar
+            </div>
+
+            <div class="signature-role">
+                Event Coordinator
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="demo-note">
+        Demo certificate generated by the College Event Management System project
+    </div>
+
+    <a href="/my-events" class="back">
+        ← Back to My Events
+    </a>
+
+</div>
+
+</body>
+</html>

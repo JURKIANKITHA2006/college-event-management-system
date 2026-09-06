@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Events</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding-bottom: 40px;
+        }
+
+        .header {
+            background: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            color: #667eea;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 45px 25px;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 35px;
+        }
+
+        .title h1 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .title p {
+            font-size: 16px;
+        }
+
+        .events {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .event-card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        .event-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+        }
+
+        .event-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .event-card h2 {
+            color: #333;
+            font-size: 21px;
+            margin-bottom: 18px;
+        }
+
+        .details {
+            color: #555;
+            line-height: 1.9;
+            margin-bottom: 22px;
+        }
+
+        .certificate-button,
+        .rating-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 12px;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+
+        .certificate-button {
+            background: #667eea;
+        }
+
+        .certificate-button:hover {
+            background: #5568d9;
+        }
+
+        .rating-button {
+            background: linear-gradient(90deg, #764ba2, #9b59b6);
+        }
+
+        .rating-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(118,75,162,0.3);
+        }
+
+        .no-events {
+            background: white;
+            padding: 40px;
+            border-radius: 18px;
+            text-align: center;
+            color: #666;
+        }
+
+        .no-events h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        @media (max-width: 850px) {
+            .events {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 550px) {
+            .events {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                padding: 18px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+
+        <div class="logo">
+            🎓 College Event Management
+        </div>
+
+        <a href="/dashboard" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="container">
+
+        <div class="title">
+
+            <h1>📋 My Events</h1>
+
+            <p>
+                Events you have successfully registered for
+            </p>
+
+        </div>
+
+
+        {% if events %}
+
+        <div class="events">
+
+            {% for event in events %}
+
+            <div class="event-card">
+
+                <div class="event-icon">
+                    🎉
+                </div>
+
+                <h2>
+                    {{ event.name }}
+                </h2>
+
+                <div class="details">
+
+                    📅 <strong>Date:</strong>
+                    {{ event.date }}<br>
+
+                    🕐 <strong>Time:</strong>
+                    {{ event.time }}<br>
+
+                    📍 <strong>Venue:</strong>
+                    {{ event.venue }}
+
+                </div>
+
+
+                <a
+                    href="/certificate/{{ event.id }}"
+                    class="certificate-button"
+                >
+                    🏆 View Certificate
+                </a>
+
+
+                <a
+                    href="/rate-event/{{ event.id }}"
+                    class="rating-button"
+                >
+                    ⭐ Rate & Give Feedback
+                </a>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-events">
+
+            <h2>No Registered Events</h2>
+
+            <p>
+                You have not registered for any events yet.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Dashboard</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f7f2fb, #eee8f7);
+            color: #333;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            color: white;
+            padding: 25px 7%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(118,75,162,0.25);
+        }
+
+        .college {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .college-icon {
+            width: 55px;
+            height: 55px;
+            background: white;
+            color: #764ba2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 27px;
+        }
+
+        .college h1 {
+            font-size: 23px;
+            margin-bottom: 5px;
+        }
+
+        .college p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .welcome {
+            text-align: right;
+        }
+
+        .welcome h3 {
+            font-size: 16px;
+        }
+
+        .welcome p {
+            font-size: 13px;
+            margin-top: 5px;
+            opacity: 0.9;
+        }
+
+        /* ================= NAVIGATION ================= */
+
+        nav {
+            background: white;
+            padding: 15px 7%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #764ba2;
+            font-weight: bold;
+            padding: 10px 18px;
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            background: #764ba2;
+            color: white;
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: 35px auto;
+        }
+
+        .page-title {
+            margin-bottom: 25px;
+        }
+
+        .page-title h2 {
+            color: #764ba2;
+            font-size: 30px;
+            margin-bottom: 7px;
+        }
+
+        .page-title p {
+            color: #777;
+        }
+
+        /* ================= STAT CARDS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 8px 25px rgba(118,75,162,0.12);
+            border-left: 5px solid #764ba2;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(118,75,162,0.18);
+        }
+
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: #f0e8f8;
+            color: #764ba2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .card:nth-child(2) {
+            border-left-color: #667eea;
+        }
+
+        .card:nth-child(2) .card-icon {
+            background: #e9edff;
+            color: #667eea;
+        }
+
+        .card:nth-child(3) {
+            border-left-color: #9b59b6;
+        }
+
+        .card:nth-child(3) .card-icon {
+            background: #f5e8fa;
+            color: #9b59b6;
+        }
+
+        .card p {
+            color: #777;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .card h2 {
+            color: #764ba2;
+            font-size: 28px;
+        }
+
+        .card h2 a {
+            text-decoration: none;
+            color: #764ba2;
+        }
+
+        /* ================= STUDENT FEATURES ================= */
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            margin-bottom: 35px;
+        }
+
+        .feature-grid .card {
+            margin-bottom: 0;
+        }
+
+        /* ================= EVENTS ================= */
+
+        .events {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(118,75,162,0.10);
+        }
+
+        .events-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .events-heading h2 {
+            color: #764ba2;
+            font-size: 25px;
+        }
+
+        .events-heading span {
+            background: #f0e8f8;
+            color: #764ba2;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+        }
+
+        .event {
+            background: linear-gradient(135deg, #ffffff, #faf7fd);
+            border: 1px solid #eee5f5;
+            border-radius: 17px;
+            padding: 24px;
+            margin-bottom: 18px;
+            position: relative;
+            transition: 0.3s;
+        }
+
+        .event:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 22px rgba(118,75,162,0.13);
+            border-color: #d9c5e8;
+        }
+
+        .event:last-child {
+            margin-bottom: 0;
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .event-title {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .event-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            background: linear-gradient(135deg, #764ba2, #667eea);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 23px;
+        }
+
+        .event h3 {
+            color: #764ba2;
+            font-size: 20px;
+        }
+
+        .event-description {
+            color: #666;
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+
+        .details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 15px 0;
+        }
+
+        .detail {
+            background: #f4eef9;
+            color: #555;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+        }
+
+        .deadline {
+            display: inline-block;
+            background: #fff4e5;
+            color: #b36b00;
+            padding: 9px 13px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        .register-form {
+            margin-top: 18px;
+        }
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            background: linear-gradient(90deg, #764ba2, #667eea);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 18px rgba(118,75,162,0.3);
+        }
+
+        /* ================= NO EVENTS ================= */
+
+        .no-events {
+            text-align: center;
+            padding: 50px 20px;
+            color: #777;
+        }
+
+        .no-events-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .no-events h3 {
+            color: #764ba2;
+            margin-bottom: 8px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #777;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #764ba2;
+        }
+
+        /* ================= MOBILE ================= */
+
+        @media (max-width: 800px) {
+
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .welcome {
+                text-align: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .event-header {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 550px) {
+
+            nav {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .container {
+                width: 94%;
+            }
+
+            .events {
+                padding: 20px;
+            }
+
+            .details {
+                flex-direction: column;
+            }
+
+            .detail {
+                width: fit-content;
+            }
+
+            .college h1 {
+                font-size: 19px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<header>
+
+    <div class="college">
+
+        <div class="college-icon">
+            🎓
+        </div>
+
+        <div>
+
+            <h1>
+                Dr.MGR Educational and Research Institute
+            </h1>
+
+            <p>
+                College Event Management System
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="welcome">
+
+        <h3>
+            👋 Welcome, 
+            {{ student['registration_no'] }}!
+        </h3>
+
+        <p>
+            Manage your college events easily
+        </p>
+
+    </div>
+
+</header>
+
+
+<nav>
+
+    <a href="{{ url_for('dashboard') }}">
+        🏠 Dashboard
+    </a>
+
+    <a href="{{ url_for('events') }}">
+        🎉 Events
+    </a>
+
+    <a href="{{ url_for('profile') }}">
+        👤 Profile
+    </a>
+
+    <a href="{{ url_for('my_events') }}">
+        📋 My Events
+    </a>
+
+    <a href="{{ url_for('logout') }}">
+        🚪 Logout
+    </a>
+
+</nav>
+
+
+<div class="container">
+
+    <div class="page-title">
+
+        <h2>
+            Student Dashboard
+        </h2>
+
+        <p>
+            Explore upcoming events and participate in college activities.
+        </p>
+
+    </div>
+
+
+    <!-- ================= STATISTICS ================= -->
+
+    <div class="stats">
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎉
+            </div>
+
+            <div>
+
+                <p>
+                    Total Events
+                </p>
+
+                <h2>
+                    {{ events|length }}
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                👥
+            </div>
+
+            <div>
+
+                <p>
+                    Total Students
+                </p>
+
+                <h2>
+                    1000
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <div>
+
+                <p>
+                    My Registrations
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('my_events') }}">
+                        View
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= STUDENT FEATURES ================= -->
+
+    <div class="feature-grid">
+
+
+        <!-- PARTICIPATION POINTS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎯
+            </div>
+
+            <div>
+
+                <p>
+                    Participation Points
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('participation_points') }}">
+                        View Points
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEADERBOARD -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏆
+            </div>
+
+            <div>
+
+                <p>
+                    Student Leaderboard
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('leaderboard') }}">
+                        View Leaderboard
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- ANALYTICS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📊
+            </div>
+
+            <div>
+
+                <p>
+                    Advanced Analytics
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('analytics') }}">
+                        View Analytics
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- DIGITAL BADGES -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏅
+            </div>
+
+            <div>
+
+                <p>
+                    Digital Badges
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('badges') }}">
+                        View Badges
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <!-- EVENT MEMORIES -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                📸
+            </div>
+
+            <div>
+
+                <p>
+                    Event Memories
+                </p>
+
+                <h2>
+                    <a href="{{ url_for('event_memories') }}">
+                        View Memories
+                    </a>
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= UPCOMING EVENTS ================= -->
+
+    <div class="events">
+
+        <div class="events-heading">
+
+            <h2>
+                🎊 Upcoming Events
+            </h2>
+
+            <span>
+                {{ events|length }} Events
+            </span>
+
+        </div>
+
+
+        {% if events %}
+
+            {% for event in events %}
+
+                <div class="event">
+
+                    <div class="event-header">
+
+                        <div class="event-title">
+
+                            <div class="event-icon">
+                                🎉
+                            </div>
+
+                            <h3>
+                                {{ event['name'] }}
+                            </h3>
+
+                        </div>
+
+                    </div>
+
+
+                    {% if event['description'] %}
+
+                        <p class="event-description">
+                            {{ event['description'] }}
+                        </p>
+
+                    {% endif %}
+
+
+                    <div class="details">
+
+                        {% if event['date'] %}
+
+                            <div class="detail">
+
+                                📅 <strong>Date:</strong>
+                                {{ event['date'] }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if event['time'] %}
+
+                            <div class="detail">
+
+                                🕐 <strong>Time:</strong>
+                                {{ event['time'] }}
+
+                            </div>
+
+                        {% endif %}
+
+
+                        {% if event['venue'] %}
+
+                            <div class="detail">
+
+                                📍 <strong>Venue:</strong>
+                                {{ event['venue'] }}
+
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+                    {% if event['registration_deadline'] %}
+
+                        <div class="deadline">
+
+                            ⏰ Registration Deadline:
+                            {{ event['registration_deadline'] }}
+
+                        </div>
+
+                    {% endif %}
+
+
+                    <form
+                        method="POST"
+                        action="{{ url_for('register') }}"
+                        class="register-form"
+                    >
+
+                        <input
+                            type="hidden"
+                            name="event_name"
+                            value="{{ event['name'] }}"
+                        >
+
+                        <button
+                            type="submit"
+                            class="btn"
+                        >
+                            🎟️ Register for Event
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="no-events">
+
+                <div class="no-events-icon">
+                    📭
+                </div>
+
+                <h3>
+                    No Events Available
+                </h3>
+
+                <p>
+                    There are currently no upcoming college events.
+                </p>
+
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+
+<footer>
+
+    © 2026
+
+    <strong>
+        Dr.MGR Educational and Research Institute
+    </strong>
+
+    · College Event Management System
+
+</footer>
+
+</body>
+
+</html>

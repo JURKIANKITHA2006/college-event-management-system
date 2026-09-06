@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>College Events</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            padding: 30px 20px;
+        }
+
+        .header {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .back {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .title {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .college-name {
+            display: inline-block;
+            background: white;
+            color: #5a3d9a;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        /* SEARCH BAR */
+
+        .search-container {
+            max-width: 1100px;
+            margin: 0 auto 30px auto;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 16px 20px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            outline: none;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .search-box:focus {
+            box-shadow: 0 8px 25px rgba(255,255,255,0.35);
+        }
+
+        /* EVENTS ONE BY ONE */
+
+        .events-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .event-card {
+            background: white;
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+        }
+
+        .event-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .event-card h2 {
+            color: #333;
+            font-size: 21px;
+            margin-bottom: 15px;
+        }
+
+        .details {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 18px;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .open {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .closed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5568d9;
+        }
+
+        button:disabled {
+            background: #aaa;
+            cursor: not-allowed;
+        }
+
+        .no-results {
+            display: none;
+            background: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            color: #666;
+            font-size: 17px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            font-size: 13px;
+        }
+
+        @media (max-width: 550px) {
+
+            .header {
+                padding: 0 5px;
+            }
+
+            .title h1 {
+                font-size: 26px;
+            }
+
+            .college-name {
+                font-size: 14px;
+                padding: 9px 14px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="header">
+
+        <div class="logo">
+            🎓 College Event Management
+        </div>
+
+        <a href="/dashboard" class="back">
+            ← Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="title">
+
+        <h1>📅 College Events</h1>
+
+        <p class="college-name">
+            🎓 Dr.MGR Educational And Research Institute
+        </p>
+
+    </div>
+
+
+    <!-- SEARCH -->
+
+    <div class="search-container">
+
+        <input
+            type="text"
+            id="eventSearch"
+            class="search-box"
+            placeholder="🔍 Search by Event Name..."
+            onkeyup="searchEvents()"
+        >
+
+    </div>
+
+
+    <!-- EVENTS -->
+
+    <div class="events-container" id="eventsContainer">
+
+
+        {% for event in events %}
+
+        <div class="event-card">
+
+            <div class="event-icon">
+                🎉
+            </div>
+
+            <h2 class="event-name">
+                {{ event.name }}
+            </h2>
+
+
+            <div class="details">
+
+                📅 <strong>Date:</strong>
+                {{ event.date }}
+
+                <br>
+
+                ⏰ <strong>Time:</strong>
+                {{ event.time }}
+
+                <br>
+
+                📍 <strong>Venue:</strong>
+                {{ event.venue }}
+
+                <br>
+
+                📌 <strong>Registration Deadline:</strong>
+                {{ event.registration_deadline }}
+
+                <br>
+
+                👥 <strong>Registrations:</strong>
+                {{ event.registered_count }} / {{ event.capacity }}
+
+            </div>
+
+
+            <div class="description">
+
+                {{ event.description }}
+
+            </div>
+
+
+            {% if event.registration_open %}
+
+                <div class="status open">
+                    🟢 Registration Open
+                </div>
+
+                <form method="POST" action="/register">
+
+                    <input
+                        type="hidden"
+                        name="event_name"
+                        value="{{ event.name }}"
+                    >
+
+                    <button type="submit">
+                        Register
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <div class="status closed">
+                    🔴 Registration Closed
+                </div>
+
+                <button type="button" disabled>
+                    Registration Closed
+                </button>
+
+            {% endif %}
+
+
+        </div>
+
+        {% endfor %}
+
+
+        <div class="no-results" id="noResults">
+            🔍 No events found.
+        </div>
+
+
+    </div>
+
+
+    <div class="footer">
+
+        © 2026 Dr.MGR Educational And Research Institute
+
+    </div>
+
+
+    <!-- SEARCH SCRIPT -->
+
+    <script>
+
+        function searchEvents() {
+
+            let searchText =
+                document.getElementById("eventSearch").value.toLowerCase();
+
+            let events =
+                document.querySelectorAll(".event-card");
+
+            let found = false;
+
+            events.forEach(function(event) {
+
+                let eventName =
+                    event.querySelector(".event-name").textContent.toLowerCase();
+
+                if (eventName.includes(searchText)) {
+
+                    event.style.display = "block";
+                    found = true;
+
+                } else {
+
+                    event.style.display = "none";
+
+                }
+
+            });
+
+            document.getElementById("noResults").style.display =
+                found ? "none" : "block";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

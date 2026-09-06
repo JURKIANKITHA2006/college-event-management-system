@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Registrations</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            padding: 35px 0;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            background: white;
+            padding: 25px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            margin-bottom: 25px;
+        }
+
+        .header h1 {
+            margin: 0;
+            color: #4c1d95;
+        }
+
+        .header p {
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .count {
+            background: #ede9fe;
+            color: #6d28d9;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .registrations {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+            overflow-x: auto;
+        }
+
+        .registrations h2 {
+            color: #4c1d95;
+            margin-top: 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        th {
+            background: #667eea;
+            color: white;
+            padding: 13px;
+            text-align: left;
+        }
+
+        td {
+            padding: 13px;
+            border-bottom: 1px solid #ddd;
+            color: #374151;
+        }
+
+        tr:hover {
+            background: #f3f4f6;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 30px;
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .bottom {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .back {
+            display: inline-block;
+            background: #9333ea;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back:hover {
+            background: #7e22ce;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <h1>👥 Student Registrations</h1>
+
+        <p>
+            Dr.MGR Educational And Research Institute
+        </p>
+
+    </div>
+
+
+    <div class="count">
+
+        👥 Total Registrations:
+        {{ registrations|length }}
+
+    </div>
+
+
+    <div class="registrations">
+
+        <h2>Registered Students</h2>
+
+        {% if registrations %}
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>#</th>
+                    <th>Registration Number</th>
+                    <th>Student Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Event</th>
+                    <th>Event Date</th>
+                    <th>Deadline</th>
+                </tr>
+
+            </thead>
+
+            <tbody>
+
+                {% for registration in registrations %}
+
+                <tr>
+
+                    <td>{{ loop.index }}</td>
+
+                    <td>
+                        {{ registration.registration_no }}
+                    </td>
+
+                    <td>
+                        {{ registration.name }}
+                    </td>
+
+                    <td>
+                        {{ registration.email }}
+                    </td>
+
+                    <td>
+                        {{ registration.department }}
+                    </td>
+
+                    <td>
+                        {{ registration.event_name }}
+                    </td>
+
+                    <td>
+                        {{ registration.date }}
+                    </td>
+
+                    <td>
+                        {{ registration.registration_deadline }}
+                    </td>
+
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+        {% else %}
+
+        <div class="empty">
+
+            No students have registered for any event yet.
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+
+    <div class="bottom">
+
+        <a
+            href="/admin_dashboard"
+            class="back"
+        >
+            ← Back to Admin Dashboard
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

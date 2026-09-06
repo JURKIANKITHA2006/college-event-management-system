@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #f7f2fb, #eee8f7);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 600px;
+            margin: 60px auto;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(118,75,162,0.15);
+        }
+
+        h1 {
+            text-align: center;
+            color: #764ba2;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            background: #f4eef9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        label {
+            display: block;
+            margin-top: 18px;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #764ba2;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+        }
+
+        button,
+        .back {
+            flex: 1;
+            padding: 13px;
+            border: none;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        button {
+            background: linear-gradient(90deg, #764ba2, #667eea);
+            color: white;
+        }
+
+        .back {
+            background: #eee;
+            color: #555;
+        }
+
+        button:hover,
+        .back:hover {
+            opacity: 0.9;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>
+                ✏️ Edit Profile
+            </h1>
+
+            <div class="info">
+
+                🔢 <strong>Registration Number:</strong>
+
+                {{ student['registration_no'] }}
+
+                <br><br>
+
+                🔒 Registration number cannot be changed.
+
+            </div>
+
+
+            <form method="POST">
+
+                <label>
+                    👤 Name
+                </label>
+
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ student['name'] }}"
+                    required
+                >
+
+
+                <label>
+                    🏫 Department
+                </label>
+
+                <input
+                    type="text"
+                    name="department"
+                    value="{{ student['department'] }}"
+                    required
+                >
+
+
+                <div class="buttons">
+
+                    <a
+                        href="{{ url_for('profile') }}"
+                        class="back"
+                    >
+                        ← Cancel
+                    </a>
+
+                    <button type="submit">
+                        💾 Save Changes
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
